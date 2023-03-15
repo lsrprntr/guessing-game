@@ -1,48 +1,44 @@
 import random
 
-tries=0
-loop=0
-win=0
-hints=0
-
-class guess: #created a class
-    
-    def game(): #define methods/blocks for the function
-        tries=0
-        loop=0
-        win=0
-        hints=0
-        print("You're playing the game") #I just lost it
+def game(): #define methods/blocks for the function
+    print("You're playing the game") #I just lost it
+    try:
         endnumber=int(input("Enter end boundary: "))
-        ans=random.randint(0,endnumber)
-        
-        ask=str.upper(input("Do you want hints? Y/N "))
-        
-        if ask=="Y":
-            hints=1
-        else:
-            hints=0
+    except:
+        print("Enter a number this time...")
+        game()
 
-        while tries<10:
-            user=int(input("Guessing "))
-            
-            if user == ans:
-                print("Correct")
-                tries=10 #exit condition
-                win=1
-            else:
-                print("Incorrect")
-                if hints==1:
-                    if user>ans:
-                        print("You're too high")
-                    elif user<ans:
-                        print("You're too low")
-                tries+=1
-                
-        if win == 0:
-            print("No more guesses")
-        elif win==1:
-            print("You won")
-        
-guess.game()
+    ans=random.randint(0,endnumber)
+    ask=str.upper(input("Do you want hints? Y/N "))
+
+    if ask=="Y":
+        hints=1
+    else:
+        print("No hints for you")
+        hints=0
+    print("You have 10 tries...")
+    for i in range(1,11):
+        user=int(input("Your guess: "))
+        if user == ans:
+            print("Correct")
+            end()
+        else:
+            print("Incorrect")
+            if hints==1:
+                if user>ans:
+                    print("You're too high")
+                elif user<ans:
+                    print("You're too low")
+    print("No more guesses")
+    end()
+
+def end():
+    ask=str.upper(input("Do you want redo? Y/N "))
+    if ask=="Y":
+        game()
+    else:
+        quit()
+
+game()
+
     
